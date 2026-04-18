@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mergington High School Activities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="icon"
@@ -23,6 +29,9 @@
           </button>
           <div id="user-info" class="hidden">
             <span id="display-name"></span>
+            <button id="manage-announcements-button" class="header-pill-button hidden">
+              Manage Announcements
+            </button>
             <button id="logout-button">Logout</button>
           </div>
         </div>
@@ -30,6 +39,14 @@
     </header>
 
     <main>
+      <section id="announcement-panel" class="announcement-panel hidden">
+        <div class="announcement-panel-header">
+          <h3>School Announcements</h3>
+          <span id="announcement-count" class="announcement-count"></span>
+        </div>
+        <div id="announcement-list" class="announcement-list"></div>
+      </section>
+
       <section id="activities-container">
         <div class="main-content-layout">
           <!-- Left Sidebar for Filters -->
@@ -131,6 +148,63 @@
           <button type="submit">Login</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <!-- Announcement Management Modal -->
+    <div id="announcement-modal" class="modal hidden">
+      <div class="modal-content announcement-modal-content">
+        <span class="close-announcement-modal">&times;</span>
+        <h3>Manage Announcements</h3>
+        <div class="announcement-modal-layout">
+          <div class="announcement-form-pane">
+            <h4 id="announcement-form-title">Add Announcement</h4>
+            <form id="announcement-form">
+              <input type="hidden" id="announcement-id" />
+              <div class="form-group">
+                <label for="announcement-title">Title</label>
+                <input
+                  type="text"
+                  id="announcement-title"
+                  required
+                  maxlength="120"
+                  placeholder="Important update"
+                />
+              </div>
+              <div class="form-group">
+                <label for="announcement-message">Message</label>
+                <textarea
+                  id="announcement-message"
+                  required
+                  maxlength="600"
+                  rows="4"
+                  placeholder="Type the announcement details"
+                ></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="announcement-start-date">Start Date (Optional)</label>
+                  <input type="datetime-local" id="announcement-start-date" />
+                </div>
+                <div class="form-group">
+                  <label for="announcement-expiration-date">Expiration Date</label>
+                  <input type="datetime-local" id="announcement-expiration-date" required />
+                </div>
+              </div>
+              <div class="announcement-form-actions">
+                <button type="button" id="announcement-cancel-edit" class="secondary-button hidden">
+                  Cancel Edit
+                </button>
+                <button type="submit" id="announcement-submit">Save Announcement</button>
+              </div>
+            </form>
+          </div>
+          <div class="announcement-list-pane">
+            <h4>All Announcements</h4>
+            <div id="announcement-admin-list" class="announcement-admin-list"></div>
+          </div>
+        </div>
+        <div id="announcement-modal-message" class="hidden message"></div>
       </div>
     </div>
 
